@@ -1,0 +1,26 @@
+    class Solution {
+        //ans K nearest points to the origin
+        //distance cal = sqrt(x2 + y2)
+    public:
+        vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+            priority_queue<pair<int, vector<int>>> pq;
+            for(int i=0;i<points.size();i++){
+                int x = points[i][0];
+                int y = points[i][1];
+
+                int dist = x*x + y*y;
+                pq.push({dist, points[i]});
+                
+                if(pq.size()>k){
+                    pq.pop();
+                }
+                
+            }
+            vector<vector<int>> ans;
+            while (!pq.empty()) {
+                ans.push_back(pq.top().second);
+                pq.pop();
+            }
+            return ans;
+        }
+    };
